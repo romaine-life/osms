@@ -29,4 +29,12 @@ provider "azurerm" {
   resource_provider_registrations = "none"
 }
 
+provider "azurerm" {
+  alias = "cluster"
+
+  features {}
+  subscription_id                 = var.cluster_subscription_id
+  resource_provider_registrations = "none"
+}
+
 provider "azuread" {}

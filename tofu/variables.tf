@@ -8,3 +8,15 @@ variable "cluster_subscription_id" {
     error_message = "cluster_subscription_id must be an Azure subscription GUID."
   }
 }
+
+variable "cluster_resource_group_name" {
+  description = "Resource group name for the AKS cluster."
+  type        = string
+  default     = "infra"
+}
+
+variable "cluster_name" {
+  description = "AKS cluster name."
+  type        = string
+  default     = "infra-aks"
+}
