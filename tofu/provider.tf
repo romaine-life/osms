@@ -21,11 +21,13 @@ terraform {
     storage_account_name = "nelsontofu"
     container_name       = "tfstate"
     key                  = "osms.tfstate"
+    use_oidc             = true
   }
 }
 
 provider "azurerm" {
   features {}
+  use_oidc                        = true
   resource_provider_registrations = "none"
 }
 
@@ -33,8 +35,11 @@ provider "azurerm" {
   alias = "cluster"
 
   features {}
+  use_oidc                        = true
   subscription_id                 = var.cluster_subscription_id
   resource_provider_registrations = "none"
 }
 
-provider "azuread" {}
+provider "azuread" {
+  use_oidc = true
+}
