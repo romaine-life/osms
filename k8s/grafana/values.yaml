@@ -48,7 +48,7 @@ grafana:
       api_url: https://graph.microsoft.com/oidc/userinfo
       role_attribute_strict: true
       allow_assign_grafana_admin: false
-      skip_org_role_sync: true
+      skip_org_role_sync: false
       use_pkce: true
     users:
       auto_assign_org: true
