@@ -28,7 +28,6 @@ spec:
             - --oidc-issuer-url=https://login.microsoftonline.com/common/v2.0
             - --insecure-oidc-skip-issuer-verification=true
             - --scope=openid profile email
-            - --email-domain=*
             - --authenticated-emails-file=/etc/oauth2-proxy/allowed-emails
             - --redirect-url=https://grafana.romaine.life/oauth2/callback
             - --upstream=http://grafana.grafana.svc.cluster.local:80/
