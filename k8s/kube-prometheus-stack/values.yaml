@@ -1,3 +1,8 @@
+externalSecret:
+  storeName: ng6-osms
+  storeKind: ClusterSecretStore
+  vaultUrl: https://ng6-osms.vault.azure.net/
+
 kube-prometheus-stack:
   # ------------------------------------------------------------------------
   # Grafana — bundled subchart
