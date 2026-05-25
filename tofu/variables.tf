@@ -20,3 +20,9 @@ variable "cluster_name" {
   type        = string
   default     = "infra-aks"
 }
+
+variable "key_vault_name" {
+  description = "OSMS-owned Key Vault for observability runtime secrets."
+  type        = string
+  default     = "ng6-osms"
+}
