@@ -6,11 +6,6 @@ data "azurerm_resource_group" "main" {
   name = "infra"
 }
 
-data "azurerm_key_vault" "main" {
-  name                = "romaine-kv"
-  resource_group_name = data.azurerm_resource_group.main.name
-}
-
 data "azurerm_user_assigned_identity" "external_secrets" {
   name                = "infra-shared-identity"
   resource_group_name = data.azurerm_resource_group.main.name

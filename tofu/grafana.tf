@@ -31,28 +31,6 @@ resource "random_password" "grafana_admin" {
   special = false
 }
 
-resource "azurerm_key_vault_secret" "grafana_oauth_client_id" {
-  name         = "grafana-oauth-client-id"
-  value        = azuread_application.grafana.client_id
-  key_vault_id = data.azurerm_key_vault.main.id
-}
-
-resource "azurerm_key_vault_secret" "grafana_oauth_client_secret" {
-  name         = "grafana-oauth-client-secret"
-  value        = azuread_application_password.grafana.value
-  key_vault_id = data.azurerm_key_vault.main.id
-}
-
-resource "azurerm_key_vault_secret" "grafana_admin_password" {
-  name         = "grafana-admin-password"
-  value        = random_password.grafana_admin.result
-  key_vault_id = data.azurerm_key_vault.main.id
-
-  lifecycle {
-    ignore_changes = [value]
-  }
-}
-
 output "grafana_client_id" {
   value       = azuread_application.grafana.client_id
   description = "Entra application client ID for Grafana AzureAD login."

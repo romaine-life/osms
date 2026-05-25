@@ -56,12 +56,6 @@ resource "azurerm_federated_identity_credential" "loki" {
   subject             = "system:serviceaccount:loki:loki"
 }
 
-resource "azurerm_key_vault_secret" "loki_identity_client_id" {
-  name         = "loki-identity-client-id"
-  value        = azurerm_user_assigned_identity.loki.client_id
-  key_vault_id = data.azurerm_key_vault.main.id
-}
-
 output "loki_storage_account_name" {
   value       = azurerm_storage_account.loki.name
   description = "Storage account used by Loki for Azure Blob object storage."
