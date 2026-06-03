@@ -55,7 +55,7 @@ kube-prometheus-stack:
       # directly; moved here so (a) we share one identity surface with the
       # rest of romaine.life and (b) the role allowlist lives in one place
       # (auth.romaine.life's user.role column, surfaced as the `role` claim
-      # on the id_token). See nelsong6/auth#53.
+      # on the id_token). See romaine-life/auth#53.
       #
       # Endpoints under /api/auth/oauth2/* because Better Auth mounts the
       # OIDC provider plugin alongside its other routes. Discovery doc is
