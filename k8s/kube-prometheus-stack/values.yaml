@@ -81,7 +81,7 @@ kube-prometheus-stack:
         # refuses sign-in until they're promoted via the auth admin
         # console. Mirrors the previous "Microsoft email allowlist" gate
         # without the per-Grafana KV copy.
-        role_attribute_path: "contains(['admin'], role) && 'Admin' || contains(['user'], role) && 'Viewer' || ''"
+        role_attribute_path: "contains(['admin'], role) && 'Admin' || contains(['user', 'service'], role) && 'Viewer' || ''"
         role_attribute_strict: true
         allow_assign_grafana_admin: false
         skip_org_role_sync: false
@@ -127,6 +127,7 @@ kube-prometheus-stack:
     # bundled dashboards as ConfigMaps. We only need to add Loki on top.
     additionalDataSources:
       - name: Loki
+        uid: loki
         type: loki
         access: proxy
         url: http://loki-gateway.loki.svc.cluster.local
