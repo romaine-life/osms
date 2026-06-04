@@ -1,7 +1,28 @@
+# kube-prometheus-stack, vendored hermetically.
+#
+# This umbrella wrapper used to declare kube-prometheus-stack as a
+# `dependencies:` entry and let ArgoCD's repo-server fetch it at render time
+# (`helm dependency build`). That fetch is nondeterministic: argocd-repo-server
+# runs `helm dependency build` unconditionally on a cold render and
+# intermittently failed to populate charts/ ("found in Chart.yaml, but missing
+# in charts/ directory: kube-prometheus-stack"), so renders flapped and burned
+# the single shared repo-server.
+#
+# Fix: vendor the subchart as charts/kube-prometheus-stack-<version>.tgz and
+# DROP the `dependencies:` block. With no dependency declared,
+# `helm dependency build` is a no-op and `helm template` renders the vendored
+# tgz from charts/ with no network — deterministic, byte-reproducible renders.
+# (The kube-prometheus-stack tgz bundles its own subcharts — grafana,
+# kube-state-metrics, node-exporter, etc. — so this single tgz is complete.)
+#
+# To bump the stack: replace the vendored tgz and update the note below —
+#   rm charts/kube-prometheus-stack-*.tgz
+#   helm pull kube-prometheus-stack \
+#     --repo https://prometheus-community.github.io/helm-charts \
+#     --version <new> -d charts/
+#
+# Vendored: kube-prometheus-stack 85.0.3
+# (https://prometheus-community.github.io/helm-charts)
 apiVersion: v2
 name: kube-prometheus-stack-wrapper
 version: 0.1.0
-dependencies:
-  - name: kube-prometheus-stack
-    version: 85.0.3
-    repository: https://prometheus-community.github.io/helm-charts
